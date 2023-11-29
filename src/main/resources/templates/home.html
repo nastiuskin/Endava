@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <title>Task Manager</title>
+
+</head>
+<body>
+<div class="top-panel">
+    <div class="logout">
+        <button>Log out</button>
+    </div>
+</div>
+<div class="content">
+    <div class="columns">
+        <div class="white-section">
+            <h2 th:text="${userdetail.getUsername()}"></h2>
+            <div class="labels">
+                <span class="label">My day</span>
+                <span class="label">Important</span>
+                <span class="label">Planned</span>
+                <span class="label">Work</span>
+                <span class="label">Personal things</span>
+            </div>
+            <div id="calendar" class="calendar"></div>
+        </div>
+        <div class="gray-section">
+            <div class="task-container">
+                <div class="task-input">
+                    <input type="text" id="newTask" placeholder="New Task" style="width: 100%;">
+                    <button id="add_task">Add Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            // Настройки календаря
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: ''
+            },
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end, allDay) {
+                // Обработка выбора даты
+                alert('Selected ' + start.format() + ' to ' + end.format());
+            }
+        });
+    });
+</script>
+</body>
+</html>

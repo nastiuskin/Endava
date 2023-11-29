@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/login.css">
+    <title>Register</title>
+</head>
+<body>
+<div class="container">
+    <div th:if="${param.success}">
+        <div class="success-message">
+            <p>Registration Successful!</p>
+        </div>
+    </div>
+
+    <div th:if="${param.error}">
+        <div class="error-message">
+            <p>User is already registered. Please choose another username.</p>
+        </div>
+    </div>
+
+    <div class="register-form-container">
+    <form class="register-form"
+          method="post"
+          role="form"
+          th:action="@{/register}"
+          th:object="${user}">
+        <h2>Register</h2>
+        <label for="username">Username:</label>
+        <input type="text" th:field="${user.username}" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" th:field="${user.password}" id="password" name="password" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div>
+        <p></p>
+    </div>
+    <span>Login here <a th:href="@{/login}">Register</a></span>
+    </div>
+</div>
+</body>
+</html>
