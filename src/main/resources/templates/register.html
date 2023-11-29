@@ -8,12 +8,6 @@
 </head>
 <body>
 <div class="container">
-    <div th:if="${param.success}">
-        <div class="success-message">
-            <p>Registration Successful!</p>
-        </div>
-    </div>
-
     <div th:if="${param.error}">
         <div class="error-message">
             <p>User is already registered. Please choose another username.</p>
@@ -21,25 +15,25 @@
     </div>
 
     <div class="register-form-container">
-    <form class="register-form"
-          method="post"
-          role="form"
-          th:action="@{/register}"
-          th:object="${user}">
-        <h2>Register</h2>
-        <label for="username">Username:</label>
-        <input type="text" th:field="${user.username}" id="username" name="username" required>
+        <form class="register-form"
+              method="post"
+              role="form"
+              th:action="@{/register}"
+              th:object="${user}">
+            <h2>Register</h2>
+            <label for="username">Username:</label>
+            <input type="text" th:field="${user.username}" id="username" name="username" required>
 
-        <label for="password">Password:</label>
-        <input type="password" th:field="${user.password}" id="password" name="password" required>
+            <label for="password">Password:</label>
+            <input type="password" th:field="${user.password}" id="password" name="password" required>
 
-        <button type="submit">Register</button>
-    </form>
+            <button type="submit">Register</button>
+        </form>
 
-    <div>
-        <p></p>
-    </div>
-    <span>Login here <a th:href="@{/login}">Register</a></span>
+        <div>
+            <p></p>
+        </div>
+        <span>Login <a th:href="@{/login}">here</a></span>
     </div>
 </div>
 </body>
