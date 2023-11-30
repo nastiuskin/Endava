@@ -20,7 +20,6 @@ public class UserService  {
     public UserEntity findByUsername(String userName){
         return userRepo.findByUsername(userName);
     }
-
     public UserEntity save(UserDTO userDTO){
         UserEntity user = new UserEntity(userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()));
         return userRepo.save(user);

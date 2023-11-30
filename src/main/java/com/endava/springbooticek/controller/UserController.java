@@ -3,6 +3,7 @@ package com.endava.springbooticek.controller;
 import com.endava.springbooticek.DTO.UserDTO;
 import com.endava.springbooticek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class UserController {
     private UserDetailsService userDetailsService;
 
     @GetMapping("/home")
+    @PreAuthorize("hasRole('USER')")
     public String home(Model model, Principal principal) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("userdetail", userDetails);

@@ -1,10 +1,12 @@
 package com.endava.springbooticek.entity;
-
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,21 +25,17 @@ public class TaskEntity {
     @Column(columnDefinition = "varchar(255) default 'false'")
     private Boolean completed;
 
-    public TaskEntity(String title, Set<LabelEntity> labels, Date date){
-        this.title = title;
-        this.date = date;
-        this.labels = labels;
-    }
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "task_label",
             joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "label_id")
+            foreignKey = @ForeignKey(name = "fk_task_id"),
+            inverseJoinColumns = @JoinColumn(name = "label_id"),
+            inverseForeignKey = @ForeignKey(name = "fk_label_id")
     )
-    private Set<LabelEntity> labels;
+    private Set<LabelEntity> labels = new HashSet<>();
 }

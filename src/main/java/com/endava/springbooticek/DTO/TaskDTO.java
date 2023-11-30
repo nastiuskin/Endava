@@ -15,4 +15,5 @@ public class TaskDTO {
 
     private String title;
     private Set<String> labels;
+    private Boolean completed = false;
 }

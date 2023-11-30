@@ -3,7 +3,6 @@ package com.endava.springbooticek.controller;
 import com.endava.springbooticek.DTO.TaskDTO;
 import com.endava.springbooticek.entity.TaskEntity;
 import com.endava.springbooticek.service.TaskService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +26,14 @@ public class TaskController {
 
     @GetMapping("/delete_task/{taskId}")
     public String delete_task(@PathVariable Long taskId){
-//        taskService.delete_task(taskId);
+        taskService.delete_task(taskId);
         return "delete_task";
     }
+
+//    @GetMapping("/{userId}/tasks")
+//    public String findAllTasksOfUser(@PathVariable Long userId){
+//
+//
+//        return "tasks";
+//    }
 }

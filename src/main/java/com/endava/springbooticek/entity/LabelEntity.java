@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import static jakarta.persistence.CascadeType.*;
 
 @Entity
 @Getter
@@ -20,6 +20,6 @@ public class LabelEntity {
     private Long id;
     private String title;
 
-    @ManyToMany(mappedBy = "labels", cascade = PERSIST)
-    private Set<TaskEntity> tasks;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "labels", cascade = CascadeType.ALL)
+    private Set<TaskEntity> tasks = new HashSet<>();
 }
