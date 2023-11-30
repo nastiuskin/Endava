@@ -1,15 +1,15 @@
 package com.endava.springbooticek.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity {
 

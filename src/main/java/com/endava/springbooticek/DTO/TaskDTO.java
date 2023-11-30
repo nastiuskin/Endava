@@ -1,11 +1,10 @@
 package com.endava.springbooticek.DTO;
 
 import com.endava.springbooticek.entity.LabelEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.endava.springbooticek.entity.UserEntity;
+import lombok.*;
 
+import java.util.Date;
 import java.util.Set;
 
 @Getter
@@ -15,6 +14,5 @@ import java.util.Set;
 public class TaskDTO {
 
     private String title;
-    private boolean completed;
-    private Set<LabelEntity> labels;
+    private Set<String> labels;
 }

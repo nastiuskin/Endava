@@ -1,4 +1,4 @@
-package com.endava.springbooticek.service;//package endava.techcourse.springbootik.service;
+package com.endava.springbooticek.service;
 
 import com.endava.springbooticek.entity.UserEntity;
 import com.endava.springbooticek.repository.UserRepo;
@@ -19,7 +19,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepo userRepo;
 
-    private UserDetails userDetails;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepo.findByUsername(username);

@@ -73,13 +73,12 @@ body {
 
 .task-input {
     display: flex;
-    margin-top: auto;
     height: 40px;
     margin-top: 10px;
 }
 
 .task-input input {
-    width: 100%;
+    width: 80%;
     margin-right: 20px;
     border-radius: 6px;
 }
@@ -131,4 +130,41 @@ button:hover {
 
 .fc-header-toolbar {
     background-color: white;
+}
+
+.date-style {
+    font-size: 25px;
+    color: white;
+}
+.task-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#newTask {
+    width: 70%; /* Increased width for the input form */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#labelSelect {
+    width: 20%; /* Same width as the input form */
+    margin-right: 10px;
+}
+
+#add_task {
+    width: 100%; /* Full width of the container */
+    margin-top: 10px; /* Margin to separate the button from the input and labels */
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#add_task:hover {
+    background-color: #45a049;
 }

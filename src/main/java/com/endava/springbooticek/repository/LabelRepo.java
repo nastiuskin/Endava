@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LabelRepo extends JpaRepository<LabelEntity, Long> {
+    public LabelEntity getLabelEntityByTitle(String title);
 }

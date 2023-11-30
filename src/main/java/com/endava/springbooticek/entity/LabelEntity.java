@@ -1,14 +1,18 @@
 package com.endava.springbooticek.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.Set;
 
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
-@Setter
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class LabelEntity {
 
     @Id
@@ -16,6 +20,6 @@ public class LabelEntity {
     private Long id;
     private String title;
 
-    @ManyToMany(mappedBy = "labels")
+    @ManyToMany(mappedBy = "labels", cascade = PERSIST)
     private Set<TaskEntity> tasks;
 }
