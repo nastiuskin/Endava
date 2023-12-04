@@ -22,14 +22,14 @@ public class TaskEntity {
     private String title;
     private Date date;
 
-    @Column(columnDefinition = "varchar(255) default 'false'")
     private Boolean completed;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+, fetch = FetchType.EAGER)
     @JoinTable(
             name = "task_label",
             joinColumns = @JoinColumn(name = "task_id"),

@@ -13,8 +13,10 @@ public class LabelService {
     @Autowired
     private LabelRepo labelRepo;
 
-    public LabelEntity getLabelEntityByTitle(String title){
-        return labelRepo.getLabelEntityByTitle(title);
+    public LabelDTO getLabelByTitle(String title){
+        LabelDTO labelDTO = new LabelDTO();
+        mapToDTO(labelRepo.getLabelEntityByTitle(title), labelDTO);
+        return labelDTO;
     }
 
     private LabelEntity mapToEntity(final LabelDTO labelDTO, final LabelEntity labelEntity){
@@ -22,7 +24,7 @@ public class LabelService {
         return labelEntity;
     }
 
-    private LabelDTO mapToDTO(final LabelEntity labelEntity, final LabelDTO labelDTO){
+    public LabelDTO mapToDTO(final LabelEntity labelEntity, final LabelDTO labelDTO){
         labelDTO.setTitle(labelEntity.getTitle());
         return labelDTO;
     }

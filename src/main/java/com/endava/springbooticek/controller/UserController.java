@@ -1,6 +1,8 @@
 package com.endava.springbooticek.controller;
 
 import com.endava.springbooticek.DTO.UserDTO;
+import com.endava.springbooticek.entity.UserEntity;
+import com.endava.springbooticek.repository.UserRepo;
 import com.endava.springbooticek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,18 +21,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @GetMapping("/home")
-    @PreAuthorize("hasRole('USER')")
-    public String home(Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("userdetail", userDetails);
-        model.addAttribute("userdetail", new UserDTO());
-        return "home";
-    }
 
     @GetMapping("/login")
     public String login(Model model) {

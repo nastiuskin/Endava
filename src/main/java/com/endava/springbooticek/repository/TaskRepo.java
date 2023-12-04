@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface TaskRepo extends JpaRepository<TaskEntity,Long> {
     void deleteById(Long id);
-    List<TaskDTO> findTasksByUserId(Long userId);
+    List<TaskEntity> findTasksByUserId(Long userId);
+    List<TaskEntity> findTasksByLabels_Title(String label);
 
 }

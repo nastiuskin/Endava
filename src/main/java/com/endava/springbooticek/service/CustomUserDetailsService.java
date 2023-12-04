@@ -34,4 +34,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public Collection<? extends GrantedAuthority> authorities(){
         return Arrays.asList(new SimpleGrantedAuthority("USER"));
     }
+
+
 }

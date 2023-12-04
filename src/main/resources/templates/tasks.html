@@ -2,9 +2,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>tasks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+    <title>Task Manager</title>
 </head>
 <body>
+<div class="top-panel">
+    <div class="logout">
+        <button>Log out</button>
+    </div>
+</div>
+<div class="content">
+    <div class="columns">
+        <div class="white-section">
+            <div class="labels">
 
+                <a th:href="@{/home}">
+                    <button class="home">HOME</button>
+                </a>
+
+                <a th:href="@{'/' +  ${userId} + '/tasks/all'}">
+                    <button class="label">All tasks</button>
+                </a>
+
+                <a th:href="@{'/' +  ${userId} + '/tasks/important'}">
+                    <button class="label">Important</button>
+                </a>
+
+                <a th:href="@{'/' +  ${userId} + '/tasks/planned'}">
+                    <button class="label">Planned</button>
+                </a>
+
+                <a th:href="@{'/' +  ${userId} + '/tasks/personal_things'}">
+                    <button class="label">Personal things</button>
+                </a>
+
+                <a th:href="@{'/' +  ${userId} + '/tasks/work'}">
+                    <button class="label">Work</button>
+                </a>
+            </div>
+            <div id="calendar" class="calendar"></div>
+        </div>
+        <div class="gray-section">
+                <div class="task-container">
+                    <div class="date-style">
+                        <p>
+                            <span th:text="${#dates.format(#dates.createNow(), 'MMMM d, yyyy')}"></span>
+                        </p>
+                        <div th:each="task : ${tasks}" class="task-line">
+                            <p th:text="${task.getTitle()}"></p>
+                            <div class="edit-delete-buttons">
+                                <button class="edit-button">Edit</button>
+                                <form th:action="@{'/delete_task/' + ${task.getId()}}" method="post" th:object="${task}" th:field="*{id}">
+                                    <input type="hidden" name="currentLabel" th:value="${label == null ? 'all' : label}" />
+                                    <button class="delete-button" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/add_task" method="post">
+                        <input type="hidden" name="currentLabel" th:value="${label == null ? 'all' : label}" />
+
+                        <div class="task-input">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <input type="text" id="newTask" name="title" placeholder="New Task" style="width: 70%;">
+
+                            <!-- Show label selection only when not in "All tasks" view -->
+                            <div th:unless="${label == 'all'}">
+                                <label for="labelSelect"></label>
+                                <select id="labelSelect" name="labels" multiple style="width: 70%;">
+                                    <option value="important" style="color: red;" th:selected="${label == 'important'}">Important</option>
+                                    <option value="planned" style="color: orange;" th:selected="${label == 'planned'}">Planned</option>
+                                    <option value="work" style="color: blue;" th:selected="${label == 'work'}">Work</option>
+                                    <option value="personal_things" style="color: green;" th:selected="${label == 'personal_things'}">Personal Things</option>
+                                </select>
+                            </div>
+
+                            <button id="add_task" type="submit">Add Task</button>
+                        </div>
+                    </form>
+
+                </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#labelSelect').select2({
+            placeholder: "Select labels",
+            closeOnSelect: false,
+            tags: true,
+        });
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: ''
+            },
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end, allDay) {
+                alert('Selected ' + start.format() + ' to ' + end.format());
+            }
+        });
+    });
+</script>
 </body>
 </html>
